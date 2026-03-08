@@ -1,9 +1,1 @@
-Todo
-- [ ] everyday push 
-
-
-# Git
-ssh or https
-
-
-# 
+学习AI，了解科技，掌握趋势
