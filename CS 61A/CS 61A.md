@@ -1,7 +1,7 @@
 
 
 ## Primary 
-
+https://www.youtube.com/playlist?list=PLHODd-fpPyMC5Mho6PIjIGsGgBW_syyHi
   
 ==分析机器执行的步骤逻辑。和滴水逆向的课程一样，学习编程语言要掌握机器操作层面（汇编）中实际的工作逻辑。==
 
@@ -17,7 +17,8 @@ https://pythontutor.com/cp/composingprograms.html#mode=edit
 ---
 
 
-2.2 `赋值语句` 的特点在于不绑定 `数据源`，不跟随其变化而发生变化，是固定的；`function` 则相反，是灵活跟随变量的。
+2.2 
+`赋值语句` 的特点在于不绑定 `数据源`，不跟随其变化而发生变化，是固定的；`function` 则相反，是灵活跟随变量的。
 
 2.5 Pure Functions & Non-Pure Functions
 ![](<non-pure function.png>)
@@ -53,9 +54,9 @@ Functions: `print()`, `abs()`, 全部执行后返回。
 4.5
 函数作为返回值。
 
-5.1 高阶函数的环境图
-!!! 5.2 Environments for Nested Definitions
-!!! 5.3 Local Names
+
+5.2 Environments for Nested Definitions ⭐
+5.3 Local Names ⭐
 
 ![](<Nested and Local.png>)
 
@@ -63,11 +64,51 @@ Functions: `print()`, `abs()`, 全部执行后返回。
 5.5 Lambda 单个表达式的快速写法
 `def`, `lambda` 差异在内部名称上
 
-\!!! 5.6 Currying 就是将多参数`func` 转换成单参`func` 的过程
-\!!! 6.1 
+5.6 Currying 就是将多参数`func` 转换成单参`func` 的过程 ⭐
+6.1 
 6.2 Lambda Function Environments
 6.3 Abstraction
+6.4 Errors & Tracebacks
+语法错误、运行时错误、逻辑错误
+解释器发现错误，真正的错误在附近
 
+7.1 **
+闭包是函数把它定义时所在作用域里的变量一起“带走”的现象。
+`def` 先创建函数，再把名称和函数进行`binding`
 
+25. Midterm 1 Review ⭐⭐⭐
 
+27. Decorators ⭐
+高阶函数、闭包、装饰器
 
+## Recursion
+28. Recursive Functions
+29. Recursion in Environments Diagrams
+31. Mutual Recursion 
+32. 
+
+37. List
+38. Containers
+40. Range
+
+43. Box-and-Pointer Notation
+
+95. Measuring Efficiency
+> 又是高阶函数，太痛苦了。
+```python
+def fib(n):
+    if n == 0 or n == 1:
+        return n
+    else:
+        return fib(n-2) + fib(n-1)
+        
+def count(f):
+    def counted(n):
+        counted.call_count += 1
+        return f(n)
+    counted.call_count = 0
+    return counted
+    
+fib = count(fib)
+fib(5)
+```
