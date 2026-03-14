@@ -1,0 +1,141 @@
+
+
+
+LLM 本身的工作方式是文本预测：输入文本，输出文本。
+Agent 是把 LLM 作为 Agent 的核心“大脑”，承担 Reasoning 与 Planning 工作，并让 Agent 能够与外部环境交互、观察环境、在环境中执行动作。它们还会调用外部工具，访问外部数据库与知识库，通过 Retrieval 来帮助完成任务。LLM 具备很强的能力，因此这类 Agent 具有很高的灵活性，能够在许多不同环境中工作，而且不需要专门为每一种环境单独训练。它们可以接入各种环境，例如浏览网页、调用在线 API，也可以进一步 Embodied 到机器人之中，在物理世界中执行任务。它们能够通过不同类型的输入感知环境，在 Multimodal 条件下接收包括传感器在内的多种信息，并在这些环境中执行动作。通过与复杂环境不断互动，它们可以更新 Memory，学习 Tool Use 方式，与人类进行交互，并在这些过程中获得更强的 Grounding 能力。
+
+这些 Agent 不只是与环境互动，它们之间也可以彼此互动。通过建模 Multi-Agent 之间的协作关系，包括与人类的协作，可以共同解决更复杂的问题。
+
+## 为什么需要 Agent Frameworks?
+
+**为什么 Agent 会成为下一阶段的重要方向？**
+
+原因有很多。现实世界的任务几乎都不是输入一段文本、一次性输出结果就结束了。很多问题都包含 Trial and Error 过程。调用外部工具、从外部知识中检索信息，都可以扩大系统能力。更重要的是，动态的 Agent Workflow 能够帮助处理复杂任务，例如 Task Decomposition、子任务分配给不同模块、通过分工实现协作。在课程中也会看到，Multi-Agent 生成过程有助于得到更好的回答。
+
+**Agent 还需要解决一系列关键挑战。**
+
+1. 首先是 Reasoning 与 Planning 能力仍需继续提升。
+2. 当前的 Agent 在执行 End-to-End 复杂任务时仍然容易出错，因此必须增强 Reasoning 与 Planning 能力。
+3. 其次，需要提升 Embodied 能力，以及从环境反馈中学习的能力。
+4. 当前 Agent 在长时程任务中的错误恢复效率还不高，还需要发展 Continual Learning 与 Self-Improvement 方法。
+5. 同时，还需要增强 Multimodal 理解、Grounding 以及 World Model 能力。
+6. 前面提到，Multi-Agent 协作能够帮助系统给出更优解，因此 Theory of Mind 等方向也很重要。安全与隐私同样关键。Agent 容易受到 Adversarial Attack，也可能输出有害信息，或者泄露私人数据。要让 Agent 安全地部署到现实世界，这些问题都必须认真处理。
+7. 除此之外，人机互动与伦理问题也很重要。如何有效控制 Agent 的行为，如何设计人与机器之间的交互方式，使机器更好服务于人的需求，这些都属于核心问题。
+
+
+
+
+
+
+Denny Zhou 提出一个问题：大家对 AI 的期待是什么？AI 应当能够像人类一样，只通过少量例子就学会任务。
+
+过去几十年里，机器学习领域一直努力发展 Data-Efficient 方法，例如 Semi-Supervised Learning、Active Learning 等。如果回看过去十几年的论文与新闻，大家经常会因为某个 Benchmark 上提升一两个点而兴奋。但在实际中，他几乎没有见过真正足够 Data-Efficient 的方法。他说，这一点上可以算是“任务失败”。他自己做这件事做了将近二十年，因此更加在意这个问题。
+
+后来，他开始思考：机器学习到底缺了什么？
+
+他的结论是，缺的是 Reasoning。
+
+Intermediate Steps 的重要性
+
+“先写出 Intermediate Steps”这个想法其实并不是最近才出现。2017 年，Google DeepMind 的研究者就在 ACL 论文中使用自然语言 Reasoning 过程来解数学题，论文里写过“通过一系列小步骤推导出最终答案”，并从零训练 Sequence Model。
+
+2021 年，OpenAI 的团队发布了 GSM8K 数据集，数据中每道题都附带 Intermediate Steps 和最终答案，并用它来 Fine-tune GPT-3。也是在 2021 年，Google Brain 的研究者提出 scratchpads for intermediate computation，用中间表示帮助语言模型进行 Program Synthesis。
+
+之后又有 Chain-of-Thought Prompting 的系统研究，对带 Intermediate Steps 的 Prompt 进行了大量评估，发现几乎在所有 NLP 任务上都能带来明显提升。
+
+从这些工作可以看出，无论是训练、Fine-tuning 还是 Prompting，真正重要的不是具体采用哪一种技术路径，而是 Intermediate Steps 本身。只要给出包含 Intermediate Steps 的示例，LLM 生成的回应通常也会包含 Intermediate Steps。
+
+从“逐步 Reasoning”到“Task Decomposition”
+
+进一步的问题是，Intermediate Steps 里是否应该加入 Reasoning 策略？
+
+
+
+他提到一项发表于 ICLR 2024 的工作，给出了严格的数学分析。核心结论是：当 Transformer 生成 Intermediate Steps 时，只要模型深度超过某个常数阈值，它就可以解决任何本质上需要串行处理的问题，而且这个阈值与输入长度无关。相反，如果 Transformer 直接生成最终答案，那么它要么需要非常大的深度，要么根本无法解决这些问题。
+
+这个结论有很多现实启发。遇到难题时，往往可以考虑增加更多 Intermediate Steps，或者调用外部工具，例如 Search，把它们纳入中间 Reasoning 过程。要理解 LLM 的能力与局限，就需要从这些基本原理出发。
+
+Zero-shot Reasoning 与 Analogical Reasoning
+
+前面讨论的是通过示例引导模型做逐步 Reasoning。接下来的问题是：不提供示例，是否也能触发 Reasoning？
+
+有一项著名工作提出，只需在问题后加一句“let’s think step by step”，模型就会自动生成 Reasoning 步骤。这种方法很令人惊讶，但通常 Zero-shot 效果还是弱于 Few-shot 方法。
+
+于是又有进一步工作：LLMs as Analogical Reasoners。核心思想是，不直接给固定示例，而是针对当前问题动态生成相关问题、相关方法或相关知识，再利用类比来帮助求解。这样做的效果往往比单纯的“let’s think step by step”更好，甚至能超过许多少样本 Chain-of-Thought Prompt。
+
+关键点在于，模型不是机械地套一个固定示例集，而是针对每个问题自适应地找到更贴近的问题与知识。
+
+不用任何 Prompt，也能挖出模型内部的 Reasoning 路径
+
+再进一步的问题是：连“let’s think step by step”这种 Prompt 也不用，模型内部是否已经存在 Reasoning 路径？
+
+他们的研究表明，答案是肯定的。
+
+方法并不复杂。在 Decoding 第一步时，不只取概率最高的那个 Token，而是观察 top-k 个可能 Token，再分别从这些起点继续 Greedy Decoding。这样做之后，会发现有些分支虽然一开始概率不高，但会在后续生成中走出完整而正确的 Reasoning 路径。
+
+例如一道关于“爸爸比我多 2 个苹果”的题，直接 Greedy 生成未必得到正确答案，但从某些起始 Token 出发，模型能够走到完整的 Reasoning 过程，并最终给出正确答案。还有像“Nicolas Cage 是出生于奇数年还是偶数年”这类问题，有的生成路径一开始就直接给出结论，但概率很低；而带有 Intermediate Steps 的那条路径，在生成到后段时概率会大幅升高。
+
+这说明，Pretraining 后的 LLM 本身就已经包含了带 Reasoning 步骤的潜在响应，问题在于如何把它们找出来。
+
+Self-Consistency：为什么多次采样有效
+
+虽然生成 Intermediate Steps 很有帮助，但也会带来一个问题。模型在 Decoding 时，本质上是在寻找“Reasoning 路径加最终答案”的联合概率最大值，而我们真正想要的是“最终答案”本身的概率最大值。这两个目标并不完全一致。
+
+从概率角度看，某个最终答案的概率，应该是把所有能够导向这个答案的 Reasoning 路径都累加起来。这个求和通常无法精确计算，所以机器学习里最自然的方法就是 Sampling。
+
+这就导向了 Self-Consistency。做法很简单：对同一个问题进行多次 Sampling，让模型生成多条不同的 Reasoning 路径，最后不是选择最常见的 Reasoning 过程，而是选择最常见的最终答案。
+
+这种方法在提出时大幅刷新了多个任务上的最好成绩。它背后的原理其实非常朴素，就是通过 Sampling 近似“答案 Marginal Probability”的最大化。在实验中，如果同一个答案在多次采样中一致性很高，例如超过 80%，那么最终正确率通常接近 100%。
+
+这里他还强调了两个容易混淆的地方。第一，如果模型直接输出一个最终答案，没有 Intermediate Steps，再做多次 Sampling 通常没有意义，因为那只是在重复取高概率 Token。第二，Self-Consistency 统计的是“答案”出现频率，而不是“Reasoning 路径”出现频率。
+
+自由文本答案下的一致性
+
+对于开放式、自由文本回答，也有类似思路，称为 Universal Self-Consistency。即便答案表述不同，只要语义上指向同一个结论，也可以通过归并后统计得到更稳的结果。
+
+LLM Reasoning 的局限
+
+接下来他谈到几个重要局限。
+
+无关 Context 会干扰模型
+
+心理学研究表明，无关信息会显著降低儿童，甚至成人的解题表现。他们想知道这件事是否也发生在 LLM 上。
+
+实验显示，确实会。哪怕在一道简单数学题里人工插入一句完全无关的话，例如“Maria 每月房租是 10 美元”，都可能让模型 Reasoning 出错。如果再提示模型“忽略无关信息”，模型往往能纠正自己。但如果不断加入越来越长的无关语句，例如“天空是蓝的，草是绿的”之类无意义句子，各类 LLM 都会出现明显性能下降。
+
+模型还不会可靠地 Self-Correction
+
+另一项研究发现，模型有时在“检查并修改上一版答案”时能够从错误中改正过来，看上去很像会 Self-Correction。但问题是，如果原答案本来就是正确的，再让它重新检查和修改，反而有可能把正确答案改坏。
+
+在 GSM8K、CommonSenseQA、HotpotQA 等多个 Benchmark 上，他们没有观察到真正稳健的 Self-Correction 收益。很多文献里所谓的提升，其实依赖了 Oracle，也就是外部先告诉模型“你的答案是错的，请你改正”。但真实情况下，模型自己并不知道当前答案到底对不对。
+
+Multi-Model Debate 未必优于简单采样
+
+他们还尝试过 Multi-Model Debate 的方法，让多个 LLM 互相讨论直到达成一致。结果发现，这类方法往往并不优于简单的 Self-Consistency。原因之一在于，辩论过程本质上也只是额外生成了更多响应。如果把同样数量的生成预算直接用于 Self-Consistency Sampling，效果并不差，甚至更简单。
+
+对代码任务来说，情况会稍好一些，因为代码天然带有 Unit Test，测试结果可以作为外部 Oracle。这也是 Self-Debug 一类方法有效的基础。
+
+Premise Order 会影响 Reasoning
+
+最后一个局限是：Premise Order 会影响模型的 Reasoning 表现。
+
+他们对 GSM8K 题目做了一个很简单的操作，只是把题目中某句条件移到后面，语义并没有改变，但多个前沿模型的正确率平均下降了大约 10 个点。模型似乎更擅长按条件出现的顺序顺着往下推，而不擅长灵活来回整理信息。
+
+为了排除语义理解干扰，他们又设计了一个更纯粹的逻辑 Reasoning 任务，用随机符号代替真实词语，只考查规则和事实能否推出结论。结果发现，如果把与查询有关的规则重新打乱顺序，而其他无关规则位置不变，那么前沿 LLM 的表现会下降 30 多个点。
+
+这说明，Reasoning 性能不仅取决于内容本身，也非常依赖信息排列方式。
+
+总结
+
+整场讲座的核心结论可以归纳为以下几点。
+
+生成 Intermediate Steps 能够显著提升 LLM 性能。这一点可以通过训练、Fine-tuning、Prompting、Zero-shot 触发、Analogical Reasoning，甚至特殊 Decoding 方式来实现。
+
+Self-Consistency 能够进一步显著增强逐步 Reasoning 能力。它适用于经过 Fine-tuning 的模型，也适用于纯 Prompt 场景。
+
+与此同时，LLM 在 Reasoning 方面仍然存在明显局限，包括容易被无关 Context 干扰，Self-Correction 不可靠，以及对 Premise Order 高度敏感。
+
+最后，他提到，真正重要的挑战不是空泛地讨论 AGI，而是从第一性原理出发，定义清楚值得解决的问题，并认真把它解决。机器学习的基本原理在这个时代依然非常重要。讲座最后，他也提到自己正在共同组织一个专注于语言建模的学术会议，并欢迎大家关注。
+
+谢谢。
+
