@@ -1,6 +1,6 @@
-edit `insert`, `append`, `o`
+`insert`, `append`, `o`, `w`, `b`
 find `/`, `n`, `N`
-copy & paste `ggVGy`
+copy & paste  `y` `p` `ggVGy` 
 
 ## Vim 高效快捷键梯度表
 
