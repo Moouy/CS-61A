@@ -1,4 +1,4 @@
-`insert`, `append`, `o`, `w`, `b`
+j`insert`, `append`, `o`, `w`, `b`
 find `/`, `n`, `N`
 copy & paste  `y` `p` `ggVGy` 
 
