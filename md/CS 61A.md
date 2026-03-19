@@ -15,9 +15,6 @@
 5 - Print and None 
 Pure Functions & Non-Pure Functions
 
-
-![](<non-pure function.png>)
-
 7 - Multiple Environments
 environment is a ==sequence== of frames.
 frames is a ==binding== between names and values.
@@ -51,9 +48,6 @@ Functions: `print()`, `abs()`, 全部执行后返回。
 ⭐16 - Environments for Nested Definitions 
 ⭐17 - Local Names 
 
-![](<Nested and Local.png>)
-
- 
 19 - Lambda 
 单个表达式的快速写法
 `def`, `lambda` 差异在内部名称上
@@ -88,7 +82,7 @@ Functions: `print()`, `abs()`, 全部执行后返回。
 37 - Box-and-Pointer Notation
 
 95 - Measuring Efficiency
-> 又是高阶函数，太痛苦了。
+
 
 
 ```python
@@ -104,7 +98,7 @@ def count(f):
         return f(n)
     counted.call_count = 0
     return counted
-    
+
 fib = count(fib)
 fib(5)
 ```

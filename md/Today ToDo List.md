@@ -1,19 +1,29 @@
-# 今天要干什么呢？
+# Today ToDo List
+## 今天要干什么呢？
 
-
-- 3/17
-	- [x] 下载项目课程，做一个项目出来。
+- [ ] 2026-03-19
+	- [ ] gitee
+	- [ ] 发布obsidian extension
+	- [ ] 如何提高AI的稳定性
+	- [ ] https://www.youtube.com/watch?v=uqbRxjtIJks&t=503s
+		- [ ] 用其他语言实现1. 买claude code最大会员 2. 独立实现自己的opencode 3. 独立实现自己的openclaw
+		- [ ] 可以使用[OnlySpecs](https://github.com/lidangzzz/OnlySpecs) 来实现opencode，带memory，motis，muti agent
+- [ ] 2026-03-18
+	- [ ] [[词典项目]]
+	- [ ] [[CS Builder]]
+- [ ] 2026-03-17
 	- [x] 爬取CVPR
 	- [x] 爬取Instagram
 	- [ ] https://www.youtube.com/watch?v=p09yRj47kNM&t=489s
 	- [ ] 明确leetcode怎么刷？
-	- [ ] 计划之外的
+	- [x] 计划之外的
 		- [x] 爬取小说网
 		- [x] 制作obsidian extension
 
 # 这2个月里做成什么事情？
 
 LLM 有他所擅长和不擅长的。是什么？
+
 
 - [ ] [立党讲座18：2025年零基础学计算机、转码、AI Agent全年龄段完整保姆级教程 - YouTube](https://www.youtube.com/watch?v=EcDLnewivg4)
 	- [ ] [UC Berkeley CS194-196](https://rdi.berkeley.edu/llm-agents/f24)
