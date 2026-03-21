@@ -1,4 +1,5 @@
-# CS 61A Note
+# CS 61A
+
 **重点是把握代码执行时，机器环境实际发生了什么变化。**
 
 [YouTube原视频链接](https://www.youtube.com/playlist?list=PLHODd-fpPyMC5Mho6PIjIGsGgBW_syyHi) Bili有AI翻译版本体验更好。[pythontutor](https://pythontutor.com/cp/composingprograms.html#mode=edit)用于观察代码执行时机器实际的行为。
@@ -12,7 +13,7 @@
 2 - Names, Assignment, and User-Defined Functions
 `赋值语句` 的特点在于不绑定 `数据源`，不跟随其变化而发生变化，是固定的；`function` 则相反，是灵活跟随变量的。
 
-5 - Print and None 
+5 - Print and None
 Pure Functions & Non-Pure Functions
 
 7 - Multiple Environments
@@ -29,9 +30,8 @@ Boolean context 关注真值。
 11 - Control Statements
 Control statements: `if`, `while`, 决定跳过或者执行。
 Functions: `print()`, `abs()`, 全部执行后返回。
-控制语句`if` `while` 会选择执行和跳过代码。 
+控制语句`if` `while` 会选择执行和跳过代码。
 调用表达式（函数） 不允许跳过任何参数的求值。所以会因为参数的求值错误而报错。
-
 
 12 - Control Expressions
 `and`, `or`, 得到结果立刻返回，所以`error`还没发生就已经结束了计算。
@@ -44,15 +44,14 @@ Functions: `print()`, `abs()`, 全部执行后返回。
 
 14 - Functions as Return Values
 
+⭐16 - Environments for Nested Definitions
+⭐17 - Local Names
 
-⭐16 - Environments for Nested Definitions 
-⭐17 - Local Names 
-
-19 - Lambda 
+19 - Lambda
 单个表达式的快速写法
 `def`, `lambda` 差异在内部名称上
 
-⭐20 - Function Currying 
+⭐20 - Function Currying
 就是将多参数`func` 转换成单参`func` 的过程
 
 22 - Lambda Function Environments
@@ -66,15 +65,14 @@ Functions: `print()`, `abs()`, 全部执行后返回。
 
 ⭐⭐⭐25 - Midterm 1 Review
 
-⭐27 - Decorators 
+⭐27 - Decorators
 高阶函数、闭包、装饰器
 
 ## Recursion
+
 28 - Recursive Functions
 29 - Recursion in Environments Diagrams
-31 - Mutual Recursion 
-
-
+31 - Mutual Recursion
 
 33 - List
 34 - Containers
@@ -82,8 +80,6 @@ Functions: `print()`, `abs()`, 全部执行后返回。
 37 - Box-and-Pointer Notation
 
 95 - Measuring Efficiency
-
-
 
 ```python
 def fib(n):

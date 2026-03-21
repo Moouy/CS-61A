@@ -1,0 +1,56 @@
+# others
+
+## choose or delete one 
+1. 如何提高AI的稳定性？
+2. 英文词典 --> 如何学习英语
+3. task = 打好基础
+	[UC Berkeley CS 194-196](https://rdi.berkeley.edu/llm-agents/f24)
+	[UC Berkeley CS 61A](https://www.bilibili.com/video/BV1AXs4zFEem/)
+	[UC Berkeley CS 61B]
+	CMU15-213
+	UC Berkeley CS186 数据库
+	Bili 南京大学 编译原理
+	Git, GitHub,app laucher, markdown editor, code editor
+	Docker, SQL
+
+
+## Agent
+
+ [UC Berkeley CS194-196](https://rdi.berkeley.edu/llm-agents/f24
+ [Percy Liang](https://cs.stanford.edu/~pliang/
+ [Kaiming He 何恺明]https://people.csail.mit.edu/kaiming/
+ [About – Shunyu Yao – 姚顺雨]https://ysymyth.github.io/
+	 ReAct: Synergizing Reasoning and Acting in Language Modelshttps://arxiv.org/abs/2210.03629
+	 SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineeringhttps://arxiv.org/abs/2405.15793
+ use cluade code do Github project star 5000+
+ leetcode 300-400
+ 实习
+
+  
+
+---
+
+  
+  
+
+
+更有商业更有价值的项目
+
+- 互联网产品人群画像：脾气大，没耐心，小气
+- 移除对话框。自动搜集信息，并且解决问题。
+- 很多人没有整理prompt的能力（说话都说不明白） → 抖音下滑下滑的用户体验
+
+  
+
+更好的商业的思考
+
+  
+  
+
+空手套白狼
+
+- 市场上哪些问题不清晰？
+- 哪些是简单组合改进可以获得巨大能量的？（利用社群
+## Sources
+https://news.ycombinator.com/news
+
