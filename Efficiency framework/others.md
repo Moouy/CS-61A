@@ -12,7 +12,7 @@
 	Bili 南京大学 编译原理
 	Git, GitHub,app laucher, markdown editor, code editor
 	Docker, SQL
-
+4. [private guide](https://archlinuxstudio.github.io/ModernSecurityProtectionGuide/#/)
 
 ## Agent
 
